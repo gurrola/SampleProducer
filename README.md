@@ -59,7 +59,7 @@ Let's look at the cmsDriver commands for step #2:</br>
 3. energy from pileup is added "on top" of the "hard scatter" generation. This is taken from a separate file:</br>
     --pileup_input dbs:/MinBias_TuneA2MB_13TeV-pythia8/Fall13-POSTLS162_V1-v1/GEN-SIM</br>
     --pileup AVE_20_BX_25ns</br>
-
+*** you need a grid certificate for this part to work ... otherwise, remove the above two lines from the cmsDriver command
 
 Let's look at the cmsDriver commands for step #3:</br>
 1. specify the "CMS sequences"/"algorithms" used to produce "objects" (electrons, muons, taus, jets, etc.):</br>

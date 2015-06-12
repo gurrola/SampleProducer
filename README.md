@@ -8,6 +8,8 @@
 6. mv SampleProducer/script.csh .
 7. mv SampleProducer/Configuration .
 8. rm -rf SampleProducer
+9. open the script.csh file and change the number of events to generate:</br>
+    --no_exec -n 10     change to     --no_exec -n 1
 9. scramv1 b
 10. ./script.csh
 11. cmsRun STEP1_GEN-SIM.py > GenOutput.log

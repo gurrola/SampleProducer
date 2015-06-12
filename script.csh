@@ -1,0 +1,7 @@
+cmsDriver.py  Configuration/GenProduction/python/ThirteenTeV/ZprimeToTauTau_M_4500_TuneCUETP8M1_tauola_13TeV_pythia8_cfi.py --fileout GENSIM.root --mc --eventcontent RAWSIM --fileout=GENSIM.root --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --datatier GEN-SIM --conditions auto:run2_mc --step GEN,SIM --magField 38T_PostLS1 --python_filename STEP1_GEN-SIM.py --no_exec -n 10
+
+cmsDriver.py  --filein file:GENSIM.root  --fileout RAWSIM.root  --pileup_input dbs:/MinBias_TuneA2MB_13TeV-pythia8/Fall13-POSTLS162_V1-v1/GEN-SIM  --mc --eventcontent RAWSIM --pileup AVE_20_BX_25ns  --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1  --datatier GEN-SIM-RAW --conditions auto:run2_mc  --step DIGI,L1,DIGI2RAW,HLT:2013,RAW2DIGI,L1Reco  --magField 38T_PostLS1  --geometry DBExtendedPostLS1  --python_filename STEP2.py  --no_exec -n 10
+
+cmsDriver.py --filein file:RAWSIM.root  --fileout AODSIM.root  --mc --eventcontent AODSIM  --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1  --datatier AODSIM --conditions auto:run2_mc  --step RAW2DIGI,L1Reco,RECO,EI  --magField 38T_PostLS1  --geometry DBExtendedPostLS1  --python_filename STEP3.py  --no_exec -n 10
+
+cmsDriver.py --filein file:AODSIM.root  --fileout mini_AODSIM.root  --mc --eventcontent MINIAODSIM  --runUnscheduled --datatier MINIAODSIM  --conditions auto:run2_mc  --step PAT --python_filename STEP4.py  --no_exec -n 10

@@ -10,7 +10,7 @@
 8. rm -rf SampleProducer
 9. scramv1 b
 10. ./script.csh
-11. cmsRun STEP1_GEN-SIM.py
+11. cmsRun STEP1_GEN-SIM.py > GenOutput.log
 12. cmsRun STEP2.py
 13. cmsRun STEP3.py
 14. cmsRun STEP4.py

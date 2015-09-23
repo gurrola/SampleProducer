@@ -53,56 +53,80 @@ cmsRun STEP4.py
 
 ### Examine Generator
 Let's look at:  `Configuration/GenProduction/python/ThirteenTeV/ZprimeToTauTau_M_4500_TuneCUETP8M1_tauola_13TeV_pythia8_cfi.py`
+
 1. specifies the "generator":
-    `generator = cms.EDFilter("Pythia8GeneratorFilter",`
+
+   `generator = cms.EDFilter("Pythia8GeneratorFilter",`
 2. specifies the center-of-mass energy:
-    `comEnergy = cms.double(13000.0),`
+
+   `comEnergy = cms.double(13000.0),`
 3. dumps information for only 1 event:
-    `maxEventsToPrint = cms.untracked.int32(1),`
+
+   `maxEventsToPrint = cms.untracked.int32(1),`
 4. tau decays are handled by another package (tauola):
+
     `ExternalDecays = cms.PSet(Tauola = cms.untracked.PSet(TauolaPolar, TauolaDefaultInputCards ),`
 5. specifies the type of process (i.e. feynman diagram. In this case it's fermion+antifermion production a new boson)
+
     `'NewGaugeBoson:ffbar2gmZZprime = on',`
 6. the new gauge boson is a Z':
+
     `'Zprime:gmZmode = 3',`
 7. specifies the mass of the Z' (4500 GeV in this case):
+
     `'32:m0 = 4500',`
 8. force the Z' to decay to a pair of tau leptons
+
     `'32:onIfAny = 15',`
 
 ### Examine Step1
 Let's look at the cmsDriver commands for step #1:
+
 1. uses the file `ZprimeToTauTau_M_4500_TuneCUETP8M1_tauola_13TeV_pythia8_cfi.py` as a template:
+
     `cmsDriver.py  Configuration/GenProduction/python/ThirteenTeV/ZprimeToTauTau_M_4500_TuneCUETP8M1_tauola_13TeV_pythia8_cfi.py`
 2. name of the output file from step #1 (generation step):
+
     `--fileout GENSIM.root`
 3. specifies the detector conditions that will be used for the RAW+SIM step ... need to specify this is Monte Carlo:
-    `--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1`
-    `--conditions auto:run2_mc`
+
+    ```--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1
+    --conditions auto:run2_mc```
 4. specify the magnetic field strength:
+
     `--magField 38T_PostLS1`
 5. produces a python file with all the above information that is ready for the user to run:
+
     `--python_filename STEP1_GEN-SIM.py`
 6. how many events to generate?:
+
     `--no_exec -n 10`
 
 ### Examine Step2
 Let's look at the cmsDriver commands for step #2:
+
 1. specify input file from step #1
+
     `--filein file:GENSIM.root`
 2. name of the output root file from step #2 (detector simulation):
-    `--fileout RAWSIM.root`
-3. energy from pileup is added "on top" of the "hard scatter" generation. This is taken from a separate file:
-    ```--pileup_input dbs:/MinBias_TuneA2MB_13TeV-pythia8/Fall13-POSTLS162_V1-v1/GEN-SIM
+
+   `--fileout RAWSIM.root`
+3. Energy from pileup is added "on top" of the "hard scatter" generation. This is taken from a separate file: 
+ 
+   ```--pileup_input dbs:/MinBias_TuneA2MB_13TeV-pythia8/Fall13-POSTLS162_V1-v1/GEN-SIM
     --pileup AVE_20_BX_25ns```
-*** you need a grid certificate for this part to work ... otherwise, remove the above two lines from the cmsDriver command
+   *** you need a grid certificate for this part to work ... otherwise, remove the above two lines from the cmsDriver command
 
 ### Examine Step3
 Let's look at the cmsDriver commands for step #3:
+
 1. specify the "CMS sequences"/"algorithms" used to produce "objects" (electrons, muons, taus, jets, etc.):
+
     `--step RAW2DIGI,L1Reco,RECO,EI`
 
 ### Examine Step4
 Let's look at the cmsDriver commands for step #4:
+
 1. specify the "CMS sequences" used to produce slimmed objects:
+
     `--step PAT`

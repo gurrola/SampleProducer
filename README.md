@@ -1,22 +1,34 @@
-# Author:  Alfredo Gurrola (Vanderbilt University), Anirban Saha (INFN)
+# Author:  Alfredo Gurrola (Vanderbilt University), Anirban Saha (INFN), Stephan Lammel (FNAL)
 
 1. export SCRAM_ARCH=slc6_amd64_gcc491  (or  setenv SCRAM_ARCH slc6_amd64_gcc491)
-2. cmsrel CMSSW_7_1_14
-3. cd CMSSW_7_1_14/src
+2. cmsrel CMSSW_7_4_4
+3. cd CMSSW_7_4_4/src
 4. cmsenv
-5. git clone https://github.com/gurrola/SampleProducer
-6. mv SampleProducer/script.csh .
-7. mv SampleProducer/Configuration .
-8. rm -rf SampleProducer
-9. open the script.csh file and change the number of events to generate:</br>
+5. source /cvmfs/cms.cern.ch/crab3/crab.sh
+6. git clone git@github.com:cms-sw/genproductions.git Configuration/GenProduction
+7. cp Configuration/GenProduction/python/ThirteenTeV/Hadronizer_TuneCUETP8M1_13TeV_generic_LHE_pythia8_cff.py .
+8. git clone https://github.com/gurrola/SampleProducer
+9. mv SampleProducer/*.csh .
+10. mv SamplerProducer/MadGraph5_v1.5.13.tar.gz .
+11. mv SampleProducer/Configuration/GenProduction/python/ThirteenTeV/* Configuration/GenProduction/python/ThirteenTeV
+12. rm -rf SampleProducer
+13. tar -zxvf MadGraph5_v1.5.13.tar.gz
+14. open the relevant .csh file and change the number of events to generate:</br>
     --no_exec -n 10     change to     --no_exec -n 1
-9. scramv1 b
-10. ./script.csh
-11. cmsRun STEP1_GEN-SIM.py > GenOutput.log
-12. cmsRun STEP2.py
-13. cmsRun STEP3.py
-14. cmsRun STEP4.py
+    * above will set the number of events to generate to 1
+15. scramv1 b
+16. To run:
 
+    FullSim Zprime with PU
+    A. ./script.csh
+    B. cmsRun STEP1_GEN-SIM.py > GenOutput.log
+    C. cmsRun STEP2.py
+    D. cmsRun STEP3.py
+    E. cmsRun STEP4.py
+
+    FastSim HeavyNu without PU
+    A. ./fastsim_heavyNu_pythia6_noPU.csh
+    B. ./aodToMiniaod.csh 
 
 Let's look at:  Configuration/GenProduction/python/ThirteenTeV/ZprimeToTauTau_M_4500_TuneCUETP8M1_tauola_13TeV_pythia8_cfi.py </br>
 1. specifies the "generator":</br>

@@ -19,15 +19,23 @@
 15. scramv1 b
 16. To run:
 
-    FullSim Zprime with PU</br>
+    FullSim Zprime with PU (using Pythia8 as the generator)</br>
     A. ./script.csh</br>
     B. cmsRun STEP1_GEN-SIM.py > GenOutput.log</br>
     C. cmsRun STEP2.py</br>
     D. cmsRun STEP3.py</br>
     E. cmsRun STEP4.py</br>
 
-    FastSim HeavyNu without PU</br>
+    FastSim HeavyNu without PU (using Pythia6 as the generator)</br>
     A. ./fastsim_heavyNu_pythia6_noPU.csh</br>
+    B. ./aodToMiniaod.csh </br>
+
+    FastSim Zprime without PU (using Pythia8 as the generator)</br>
+    A. ./fastsim_zprime.csh</br>
+    B. ./aodToMiniaod.csh </br>
+
+    FastSim using an input LHE file</br>
+    A. ./fastsim_inputLHE.csh</br>
     B. ./aodToMiniaod.csh </br>
 
 Let's look at:  Configuration/GenProduction/python/ThirteenTeV/ZprimeToTauTau_M_4500_TuneCUETP8M1_tauola_13TeV_pythia8_cfi.py </br>
